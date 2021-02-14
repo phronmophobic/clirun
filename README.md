@@ -1,14 +1,12 @@
 # clirun
 
-Run any function with clojure's cli
+Run any function from clojure's cli.
 
 ## Usage
 
 Add an alias to your `deps.edn`:
 
 ```clojure
-
-In Aliases:
   :run
   {:extra-deps {com.phronemophobic/clirun {:mvn/version "1.0.0"}}
    :main-opts ["-m" "com.phronemophobic.clirun"]}
@@ -68,7 +66,7 @@ $ clj -M -e "(range 50)" | xargs -0 clj -M:run -pp clojure.core/partition 5
  (40 41 42 43 44)
  (45 46 47 48 49))
 
-``
+```
 
 ## License
 
