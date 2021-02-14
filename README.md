@@ -23,18 +23,18 @@ Examples:
 
 
 ```bash
-;; Write to a file using clojure.core/split
+# Write to a file using clojure.core/split
 $ clj -M:run clojure.core/spit '"foo.txt"' '[1 2 3]'
 $ cat foo.txt
 [1 2 3]
 
-;; prn the return value by
-;; adding -p as the first argument
+# prn the return value by
+# adding -p as the first argument
 $ clj -M:run -p clojure.core/+ 1 2 3 4
 10
 
-;; pretty print the return value by
-;; adding -pp as the first value
+# pretty print the return value by
+# adding -pp as the first value
 $ clj -M:run -pp  clojure.core/macroexpand-1 '(time (+ 1 2 3))'
 (clojure.core/let
  [start__6153__auto__
@@ -53,7 +53,7 @@ $ clj -M:run -pp  clojure.core/macroexpand-1 '(time (+ 1 2 3))'
    " msecs"))
  ret__6154__auto__)
  
-;; mix and match
+# mix and match
 $ clj -M -e "(range 50)" | xargs -0 clj -M:run -pp clojure.core/partition 5
 ((0 1 2 3 4)
  (5 6 7 8 9)
