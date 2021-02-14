@@ -37,21 +37,29 @@
 
 
 (defn no-args []
-  (prn "hi"))
+  (prn "hi")
+  42)
 
 (defn test-fn [& args]
-  (prn "args:" args))
+  (prn "args:" args)
+  42)
 
 (defn -main
   [& args]
   (try
-    (let [[f & args] (read-args args)]
+    (let [[print-fn [f & args]] (case (first args)
+                                  "-p" [prn (read-args (rest args))]
+                                  "-pp" [(requiring-resolve 'clojure.pprint/pprint) (read-args (rest args))]
+                                  ;; else
+                                  [false (read-args args)])]
       (when (nil? f)
         (throw (err "No function found on command line")))
       (let [resolved-f (requiring-resolve' f)]
 
         (if resolved-f
-          (apply resolved-f args)
+          (let [ret (apply resolved-f args)]
+            (when print-fn
+              (print-fn ret)))
           (throw (err "Function not found:" f)))))
     (catch ExceptionInfo e
       (if (-> e ex-data :exec-msg)
